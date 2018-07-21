@@ -1,0 +1,17 @@
+.container {
+    margin: 0;
+    padding: 0;
+}
+
+.container p {
+    width: 200px;
+    border: 1px solid black;
+    margin: 10px 5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-weight: bold;
+
+}
+
+
