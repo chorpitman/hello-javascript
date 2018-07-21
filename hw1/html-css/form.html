@@ -7,55 +7,45 @@
 </head>
 <body>
 <div class="container">
-    <form class="form" id="sign-form" action="#">
+    <form class="form" id="registration-form" action="#" method="post">
         <!--gender-->
         <div class="row">
-            <div class="col-20">
-                <label>Gender</label>
+            <div class="form-label">
+                <label>Gender:</label>
             </div>
-
-            <div class="">
-                <input type="radio" name="gender" value="male" checked><label>Male</label>
-            </div>
-
-            <div class="">
-                <input type="radio" name="gender" value="male"><label>Female</label>
+            <div class="form-input">
+                <!--спросить по поводу fieldset и связи одного лэбла и 2х инпутов-->
+                <fieldset>
+                    <input type="radio" name="gender" value="male" checked><label>Male</label>
+                    <input type="radio" name="gender" value="female"><label>Female</label>
+                </fieldset>
             </div>
         </div>
-
-
         <!--first name-->
         <div class="row">
-            <div class="col-20">
-                <label for="fname">First name</label>
+            <div class="form-label">
+                <label for="fname">First name:</label>
             </div>
-
-            <div class="col-75">
+            <div class="form-input">
                 <input type="text" id="fname" name="firstname" placeholder="Enter your first name...">
             </div>
         </div>
-
-
         <!--last name-->
         <div class="row">
-            <div class="col-20">
-                <label for="lname">Last name</label>
+            <div class="form-label">
+                <label for="lname">Last name:</label>
             </div>
-
-            <div class="col-75">
+            <div class="form-input">
                 <input type="text" id="lname" name="lastname" placeholder="Enter your last name...">
             </div>
         </div>
-
-
         <!--country-->
         <div class="row">
-            <div class="col-20">
-                <label for="country">Country</label>
+            <div class="form-label">
+                <label for="country">Country:</label>
             </div>
-
-            <div class="col-75">
-                <select id="country" name="country" form="sign-form">
+            <div class="form-input">
+                <select id="country" name="country" form="registration-form">
                     <optgroup label="countries">
                         <option value="Ukraine" selected>Ukraine</option>
                         <option value="Australia">Australia</option>
@@ -63,26 +53,17 @@
                     </optgroup>
                 </select>
             </div>
-
         </div>
-
-
         <!--message-->
         <div class="row">
-            <div class="col-20">
-                <label for="subject">Your message</label>
-            </div>
-
-            <div class="col-75">
-                <textarea id="subject" name="subject" placeholder="Write something.."></textarea>
-            </div>
+            <label for="subject">Your message:
+                <textarea id="subject" name="subject" placeholder="Write something..."></textarea>
+            </label>
         </div>
-
-        <!--ia gree-->
+        <!--agree-->
         <div class="row">
-            <input type="checkbox" name="agreement" value="male"><label>I agree</label>
+            <input type="checkbox" name="agreement" value="agree"><label>I agree</label>
         </div>
-
         <!--submit-->
         <div class="row">
             <input type="submit" value="Submit">
