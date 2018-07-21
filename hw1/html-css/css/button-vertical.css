@@ -1,0 +1,32 @@
+.container {
+    margin: 15px 5px 5px 0px;
+    padding: 20px 5px 0px;
+    border-width: 0 0 0 3px;
+    border-style: solid;
+    border-color: #000000;
+}
+
+.btn-container {
+    position: relative;
+    padding: 10px;
+}
+
+.btn-container button {
+    display: block;
+    width: 10%;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer
+}
+
+.btn-container button:first-child:hover {
+    background: aliceblue;
+}
+
+.btn-container button:nth-child(2):hover {
+    background: lavenderblush;
+}
+
+.btn-container button:last-child:hover {
+    background: floralwhite;
+}
