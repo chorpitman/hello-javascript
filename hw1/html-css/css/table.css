@@ -1,0 +1,22 @@
+.wrapper {
+    width: 150px;
+    margin: 5px 10px;
+    border-top: 2px solid black;
+    border-left: 1px solid black;
+}
+
+th, td {
+    border: black 1px solid;
+    text-align: center;
+}
+
+th {
+    background: #888888;
+}
+
+table {
+    border-collapse: collapse;
+    font-size: x-large;
+    margin: 7px;
+    width: 140px;
+}
