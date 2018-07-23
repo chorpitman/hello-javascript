@@ -1,0 +1,26 @@
+.container {
+    width: 100%;
+}
+
+.contentWrapper div {
+    vertical-align: center;
+    border: 1px solid black;
+
+}
+
+.json-input, .json-output {
+    height: 500px;
+    width: 500px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.textArea {
+    border: none;
+    width: 99%;
+    height: 99%
+}
+
+button {
+    margin: 10px 5px 0 5px;
+}
