@@ -1,0 +1,34 @@
+{
+  "type": "form",
+  "items": [
+    {
+      "type": "title",
+      "label": "Request a callback"
+    },
+    {
+      "type": "input",
+      "label": "First Name",
+      "id": "firstName"
+    },
+    {
+      "type": "input",
+      "label": "Last Name",
+      "id": "lastName"
+    },
+    {
+      "type": "input",
+      "label": "Email",
+      "id": "email"
+    },
+    {
+      "type": "input",
+      "label": "When is the best time to call you?",
+      "id": "timeToCall"
+    },
+    {
+      "type": "checkbox",
+      "label": "consent to my submitted data being collected & stored",
+      "id": "agreement"
+    }
+  ]
+}
