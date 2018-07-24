@@ -90,7 +90,12 @@ function createFormElement(item) {
     return createdElement;
 }
 
-var jsonObject = {
+function getDefaultJson() {
+    let element = document.getElementById("textAreaJsonData");
+    element.innerText = JSON.stringify(defaultJsonObject);
+}
+
+var defaultJsonObject = {
     "type": "form",
     "items": [
         {
