@@ -3,17 +3,11 @@ const REQUEST_TYPE = "get";
 const FORM_ID = "my-form";
 
 function buildForm() {
-    let jsonObject = readData();
-    createComponent(jsonObject);
-}
-
-function createComponent(jsonObject) {
-    //get base element
-    let baseElement = createBaseElement(jsonObject);
-    //get inputs and labels
-    let inputs = getFormElements(jsonObject);
-    let createdFormComponent = createFormComponent(baseElement);
-    formBuilder(inputs, createdFormComponent)
+    let json = readData();
+    let baseElement = getBaseElement(json);
+    let formComponent = getFormComponent(baseElement);
+    let formElements = getFormElements(json);//get inputs and labels
+    formBuilder(formElements, formComponent);
 }
 
 function getFormElements(jsonObject) {
@@ -25,22 +19,22 @@ function getFormElements(jsonObject) {
             elements.push(formElements)
         }
     }
-    return elements
+    return elements;
 }
 
-function formBuilder(formElements, createdForm) {
+function formBuilder(formElements, formComponent) {
     for (let i = 0; i < formElements.length; i++) {
         let item = formElements[i];
-        createdForm.appendChild(item);
+        formComponent.appendChild(item);
     }
 }
 
-function createFormComponent(baseElement) {
+function getFormComponent(baseElement) {
     let data = document.getElementById("json-output");
     return data.appendChild(baseElement);
 }
 
-function createBaseElement(jsonObject) {
+function getBaseElement(jsonObject) {
     if (jsonObject.type === FORM) {
         return createForm();
     }
@@ -92,7 +86,6 @@ function createFormElement(item) {
 function readData() {
     let data = document.getElementById("textAreaJsonData").value;
     let jsonObject = JSON.parse(data);
-
     return jsonObject;
 }
 
