@@ -1,42 +1,37 @@
 const FORM = "form";
-const REQUEST = "get";
+const REQUEST_TYPE = "get";
 const FORM_ID = "my-form";
 
 function readData() {
     let data = document.getElementById("textAreaJsonData").value;
     let jsonObject = JSON.parse(data);
+    createComponent(jsonObject);
+}
+
+function createComponent(jsonObject) {
     //get base element
     let baseElement = createBaseElement(jsonObject);
-    //get inputs
-    let inputs = getInputs(jsonObject);
-    //getLabels
-
-    //createComponent
-    createComponent(baseElement, inputs);
+    //get inputs and labels
+    let inputs = getIFormElements(jsonObject);
+    let createdFormComponent = createComponentForm(baseElement);
+    formBuilder(inputs, createdFormComponent)
 }
 
-//todo create component moove to method
-function createComponent(baseElement, inputs) {
-
-    let createdForm = createComponentForm(baseElement);
-    appendInputsToForm(inputs, createdForm)
-}
-
-function getInputs(jsonObject) {
-    let inputs = [];
+function getIFormElements(jsonObject) {
+    let elements = [];
     if (jsonObject.type === FORM && Array.isArray(jsonObject.items) && jsonObject.items.length !== 0) {
         for (let i = 0; i < jsonObject.items.length; i++) {
             let item = jsonObject.items[i];
-            let createdInput = createFormElement(item);
-            inputs.push(createdInput)
+            let formElements = formElementBuilder(item);
+            elements.push(formElements)
         }
     }
-    return inputs
+    return elements
 }
 
-function appendInputsToForm(inputs, createdForm) {
-    for (let i = 0; i < inputs.length; i++) {
-        let item = inputs[i];
+function formBuilder(formElements, createdForm) {
+    for (let i = 0; i < formElements.length; i++) {
+        let item = formElements[i];
         createdForm.appendChild(item);
     }
 }
@@ -47,53 +42,53 @@ function createComponentForm(baseElement) {
 }
 
 function createBaseElement(jsonObject) {
-    if (jsonObject.type === 'form') {
+    if (jsonObject.type === FORM) {
         return createForm();
     }
 }
 
 function createForm() {
     let form = document.createElement(FORM);
-    form.setAttribute('method', REQUEST);
+    form.setAttribute('method', REQUEST_TYPE);
     form.setAttribute('action', "#");
     form.setAttribute("id", FORM_ID);
 
     return form;
 }
 
-function createFormElement(item) {
+function formElementBuilder(item) {
     if (item.type === "title") {
-        return createTitleElement(item);
+        return createFormTitleElement(item);
     }
 
-    return createInputElement(item);
+    return createFormElement(item);
 }
 
-//CREATE INPUTS
-//title
-function createTitleElement(item) {
-    let inputElement = document.createElement("h2");
+function createFormTitleElement(item) {
+    let createdElement = document.createElement("div");
+    let createdInput = document.createElement("h2");
+    createdInput.innerText = item.label;
+    createdElement.appendChild(createdInput);
 
-    return inputElement;
+    return createdElement;
 }
 
-//input text
-function createInputElement(item) {
+function createFormElement(item) {
+    let createdElement = document.createElement("div");
+
     let inputElement = document.createElement("input");
     inputElement.setAttribute('type', item.type);
     inputElement.setAttribute('id', item.id);
 
-    return inputElement;
-}
+    let label = document.createElement("label");
+    label.setAttribute("for", item.id);
+    label.innerText = item.label;
 
-/*
-*   <input type="text" id="firstName"><label>First Name</label>
-    <input type="text" id="lastName"><label>Last Name</label>
-    <input type="text" id="email"><label>Email</label>
-    <input type="text" id="timeToCall"><label>When is the best time to call you?</label>
-    <input type="checkbox" id="agreement"><label>Horns</label>
-*
-* */
+    createdElement.appendChild(inputElement);
+    createdElement.appendChild(label);
+
+    return createdElement;
+}
 
 var jsonObject = {
     "type": "form",
