@@ -2,9 +2,8 @@ const FORM = "form";
 const REQUEST_TYPE = "get";
 const FORM_ID = "my-form";
 
-function readData() {
-    let data = document.getElementById("textAreaJsonData").value;
-    let jsonObject = JSON.parse(data);
+function buildForm() {
+    let jsonObject = readData();
     createComponent(jsonObject);
 }
 
@@ -12,12 +11,12 @@ function createComponent(jsonObject) {
     //get base element
     let baseElement = createBaseElement(jsonObject);
     //get inputs and labels
-    let inputs = getIFormElements(jsonObject);
-    let createdFormComponent = createComponentForm(baseElement);
+    let inputs = getFormElements(jsonObject);
+    let createdFormComponent = createFormComponent(baseElement);
     formBuilder(inputs, createdFormComponent)
 }
 
-function getIFormElements(jsonObject) {
+function getFormElements(jsonObject) {
     let elements = [];
     if (jsonObject.type === FORM && Array.isArray(jsonObject.items) && jsonObject.items.length !== 0) {
         for (let i = 0; i < jsonObject.items.length; i++) {
@@ -36,7 +35,7 @@ function formBuilder(formElements, createdForm) {
     }
 }
 
-function createComponentForm(baseElement) {
+function createFormComponent(baseElement) {
     let data = document.getElementById("json-output");
     return data.appendChild(baseElement);
 }
@@ -58,13 +57,13 @@ function createForm() {
 
 function formElementBuilder(item) {
     if (item.type === "title") {
-        return createFormTitleElement(item);
+        return createTitleFormElement(item);
     }
 
     return createFormElement(item);
 }
 
-function createFormTitleElement(item) {
+function createTitleFormElement(item) {
     let createdElement = document.createElement("div");
     let createdInput = document.createElement("h2");
     createdInput.innerText = item.label;
@@ -88,6 +87,13 @@ function createFormElement(item) {
     createdElement.appendChild(label);
 
     return createdElement;
+}
+
+function readData() {
+    let data = document.getElementById("textAreaJsonData").value;
+    let jsonObject = JSON.parse(data);
+
+    return jsonObject;
 }
 
 function getDefaultJson() {
