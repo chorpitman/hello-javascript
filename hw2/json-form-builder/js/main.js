@@ -10,11 +10,11 @@ function buildForm() {
     formBuilder(formElements, formComponent);
 }
 
-function getFormElements(jsonObject) {
+function getFormElements(json) {
     let elements = [];
-    if (jsonObject.type === FORM && Array.isArray(jsonObject.items) && jsonObject.items.length !== 0) {
-        for (let i = 0; i < jsonObject.items.length; i++) {
-            let item = jsonObject.items[i];
+    if (json.type === FORM && Array.isArray(json.items) && json.items.length !== 0) {
+        for (let i = 0; i < json.items.length; i++) {
+            let item = json.items[i];
             let formElements = formElementBuilder(item);
             elements.push(formElements)
         }
@@ -30,12 +30,12 @@ function formBuilder(formElements, formComponent) {
 }
 
 function getFormComponent(baseElement) {
-    let data = document.getElementById("json-output");
-    return data.appendChild(baseElement);
+    let foundElement = document.getElementById("json-output");
+    return foundElement.appendChild(baseElement);
 }
 
-function getBaseElement(jsonObject) {
-    if (jsonObject.type === FORM) {
+function getBaseElement(json) {
+    if (json.type === FORM) {
         return createForm();
     }
 }
@@ -49,44 +49,47 @@ function createForm() {
     return form;
 }
 
-function formElementBuilder(item) {
-    if (item.type === "title") {
-        return createTitleFormElement(item);
+function formElementBuilder(jsonItem) {
+    if (jsonItem.type === "title") {
+        return createTitleFormElement(jsonItem);
     }
 
-    return createFormElement(item);
+    return createFormElement(jsonItem);
 }
 
-function createTitleFormElement(item) {
-    let createdElement = document.createElement("div");
-    let createdInput = document.createElement("h2");
-    createdInput.innerText = item.label;
-    createdElement.appendChild(createdInput);
+function createTitleFormElement(jsonItem) {
+    let div = document.createElement("div");
+    let input = document.createElement("h2");
+    input.innerText = jsonItem.label;
+    div.appendChild(input);
 
-    return createdElement;
+    return div;
 }
 
-function createFormElement(item) {
-    let createdElement = document.createElement("div");
+function createFormElement(jsonItem) {
+    let div = document.createElement("div");
+    let input = document.createElement("input");
+    input.setAttribute('type', jsonItem.type);
+    input.setAttribute('id', jsonItem.id);
 
-    let inputElement = document.createElement("input");
-    inputElement.setAttribute('type', item.type);
-    inputElement.setAttribute('id', item.id);
+    let label = createLabel(jsonItem);
 
+    div.appendChild(input);
+    div.appendChild(label);
+
+    return div;
+}
+
+function createLabel(jsonItem) {
     let label = document.createElement("label");
-    label.setAttribute("for", item.id);
-    label.innerText = item.label;
-
-    createdElement.appendChild(inputElement);
-    createdElement.appendChild(label);
-
-    return createdElement;
+    label.setAttribute("for", jsonItem.id);
+    label.innerText = jsonItem.label;
+    return label;
 }
 
 function readData() {
     let data = document.getElementById("textAreaJsonData").value;
-    let jsonObject = JSON.parse(data);
-    return jsonObject;
+    return JSON.parse(data);
 }
 
 function getDefaultJson() {
