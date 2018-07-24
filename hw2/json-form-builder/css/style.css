@@ -5,20 +5,28 @@
 .contentWrapper div {
     vertical-align: center;
     border: 1px solid black;
-
 }
 
-.json-input, .json-output {
+.json-input, .jsonOutput {
     height: 500px;
-    width: 500px;
+    width: 350px;
     display: inline-block;
     vertical-align: top;
 }
 
 .textArea {
     border: none;
-    width: 99%;
-    height: 99%
+    width: 98%;
+    height: 98%
+}
+
+.jsonOutput div {
+    margin: 10px;
+    border: 0;
+}
+
+.jsonOutput label {
+    margin-left: 10px;
 }
 
 button {
